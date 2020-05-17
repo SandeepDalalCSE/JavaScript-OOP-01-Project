@@ -28,6 +28,32 @@ class Product {
 console.log(new Product("A carpet", "https://images-na.ssl-images-amazon.com/images/I/81W6An71HSL._SX355_.jpg", 500, "a long caret!"));
 // Consoling Product object
 
+// Now creating class for rendering a single product-item
+class ProductItem {
+  product;
+
+  constructor(product) {
+    this.product = product;
+  }
+
+  render() {
+    const prodEl = document.createElement("li");
+    prodEl.className = "product-item";
+    prodEl.innerHTML = `
+      <div>
+      <img src="${this.product.imageUrl}" alt="${this.product.title}">
+      <div class="product-item__content">
+        <h2>${this.product.title}</h2>
+        <h3>Rs ${this.product.price}</h3>
+        <p>${this.product.description}</p>
+        <button>Add to Cart</button>
+      </div>
+      </div>
+      `; // this => ProductItem Object
+    return prodEl;
+  }
+}
+
 // Now Converting productList Object into ProductList Class
 class ProductList {
   products = [
@@ -58,20 +84,22 @@ class ProductList {
     const prodList = document.createElement("ul");
     prodList.className = "product-list";
     for (const prod of this.products) {
+      const productItem = new ProductItem(prod);
+      const prodEl = productItem.render();
       //this => productList Object
-      const prodEl = document.createElement("li");
-      prodEl.className = "product-item";
-      prodEl.innerHTML = `
-      <div>
-      <img src="${prod.imageUrl}" alt="${prod.title}">
-      <div class="product-item__content">
-        <h2>${prod.title}</h2>
-        <h3>Rs ${prod.price}</h3>
-        <p>${prod.description}</p>
-        <button>Add to Cart</button>
-      </div>
-      </div>
-      `;
+      // const prodEl = document.createElement("li");
+      // prodEl.className = "product-item";
+      // prodEl.innerHTML = `
+      // <div>
+      // <img src="${prod.imageUrl}" alt="${prod.title}">
+      // <div class="product-item__content">
+      //   <h2>${prod.title}</h2>
+      //   <h3>Rs ${prod.price}</h3>
+      //   <p>${prod.description}</p>
+      //   <button>Add to Cart</button>
+      // </div>
+      // </div>
+      // `;
       prodList.append(prodEl);
     }
     renderHook.append(prodList);
