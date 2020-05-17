@@ -36,6 +36,12 @@ class ProductItem {
     this.product = product;
   }
 
+  addToCart() {
+    console.log(this); // here this is ProductItem Class/Object
+    console.log("Adding product to cart");
+    console.log(this.product); // here this.product => ProductItem.product
+  }
+
   render() {
     const prodEl = document.createElement("li");
     prodEl.className = "product-item";
@@ -50,6 +56,10 @@ class ProductItem {
       </div>
       </div>
       `; // this => ProductItem Object
+    const addCartButton = prodEl.querySelector("button");
+    // addCartButton.addEventListener("click", this.addToCart); // this => button Object not the ProductItem
+    addCartButton.addEventListener("click", this.addToCart.bind(this)); // using bind(this), now this behaves that it is ProductItem Class/Object
+    //
     return prodEl;
   }
 }
