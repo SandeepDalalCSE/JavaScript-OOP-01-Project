@@ -35,6 +35,13 @@ console.log(test.title, test.price);
 class ShoppingCart {
   item = [];
 
+  addProduct(product) {
+    this.item.push(product); // adding product to item array of shopping cart.
+    this.totalOutput = `
+    <h2>Total : Rs ${1} </h2>
+    `;
+  }
+
   render() {
     const cartEl = document.createElement("section");
     cartEl.innerHTML = `
@@ -42,9 +49,13 @@ class ShoppingCart {
     <button> Order Now! </button>
     `;
     cartEl.className = "cart";
+    this.totalOutput = cartEl.querySelector("h2");
     return cartEl;
   }
 }
+
+// const a = new ShoppingCart();
+// console.log(a);
 
 // Now creating class for rendering a single product-item
 class ProductItem {
