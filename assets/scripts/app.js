@@ -151,16 +151,21 @@ class Shop {
     const renderHook = document.getElementById("app");
     const cart = new ShoppingCart();
     const cartEl = cart.render();
-    renderHook.append(cartEl);
     console.log(new ProductList()); // ProductList Class or ProductList Object in general
     const productList = new ProductList();
     const productListEl = productList.render();
+    renderHook.append(cartEl);
     renderHook.append(productListEl);
   }
 }
 
-const shop = new Shop();
-shop.render();
+class App {
+  static init() {
+    const shop = new Shop();
+    shop.render();
+  }
+}
+App.init();
 
 //Converting this object literal concept into classes.
 // const productList = {
