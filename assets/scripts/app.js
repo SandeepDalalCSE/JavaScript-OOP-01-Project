@@ -26,7 +26,25 @@ class Product {
 }
 
 console.log(new Product("A carpet", "https://images-na.ssl-images-amazon.com/images/I/81W6An71HSL._SX355_.jpg", 500, "a long caret!"));
+const test = new Product("A carpet", "https://images-na.ssl-images-amazon.com/images/I/81W6An71HSL._SX355_.jpg", 500, "a long caret!");
+test.title = "change";
+console.log(test.title, test.price);
 // Consoling Product object
+
+// Now creating class for shopping cart
+class ShoppingCart {
+  item = [];
+
+  render() {
+    const cartEl = document.createElement("section");
+    cartEl.innerHTML = `
+    <h2>Total : Rs ${0} </h2>
+    <button> Order Now! </button>
+    `;
+    cartEl.className = "cart";
+    return cartEl;
+  }
+}
 
 // Now creating class for rendering a single product-item
 class ProductItem {
@@ -90,7 +108,6 @@ class ProductList {
     }
   ];
   render() {
-    const renderHook = document.getElementById("app");
     const prodList = document.createElement("ul");
     prodList.className = "product-list";
     for (const prod of this.products) {
@@ -112,12 +129,27 @@ class ProductList {
       // `;
       prodList.append(prodEl);
     }
-    renderHook.append(prodList);
+    return prodList;
+    // renderHook.append(prodList);
   }
 }
-console.log(new ProductList()); // ProductList Class or ProductList Object in general
-const productList = new ProductList();
-productList.render();
+
+// creating class to combine product list and shopping cart togther
+class Shop {
+  render() {
+    const renderHook = document.getElementById("app");
+    const cart = new ShoppingCart();
+    const cartEl = cart.render();
+    renderHook.append(cartEl);
+    console.log(new ProductList()); // ProductList Class or ProductList Object in general
+    const productList = new ProductList();
+    const productListEl = productList.render();
+    renderHook.append(productListEl);
+  }
+}
+
+const shop = new Shop();
+shop.render();
 
 //Converting this object literal concept into classes.
 // const productList = {
