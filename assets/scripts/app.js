@@ -37,7 +37,7 @@ class ShoppingCart {
 
   addProduct(product) {
     this.item.push(product); // adding product to item array of shopping cart.
-    this.totalOutput = `
+    this.totalOutput.innerHTML = `
     <h2>Total : Rs ${1} </h2>
     `;
   }
@@ -69,6 +69,8 @@ class ProductItem {
     console.log(this); // here this is ProductItem Class/Object
     console.log("Adding product to cart");
     console.log(this.product); // here this.product => ProductItem.product
+
+    App.addProductToCart(this.product);
   }
 
   render() {
@@ -165,6 +167,12 @@ class App {
   static init() {
     const shop = new Shop();
     shop.render();
+    this.cart = shop.cart; // declaring cart property of in App Class and assigning the value equal to cart of Shop Class. ie is nothing but same instance of ShoppingCart class.
+    console.log(this.cart); // this.cart => App.cart, cart property will have same instance of ShoppingCart
+  }
+
+  static addProductToCart(product) {
+    this.cart.addProduct(product);
   }
 }
 App.init();
