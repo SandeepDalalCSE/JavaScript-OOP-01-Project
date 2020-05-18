@@ -149,8 +149,10 @@ class ProductList {
 class Shop {
   render() {
     const renderHook = document.getElementById("app");
-    const cart = new ShoppingCart();
-    const cartEl = cart.render();
+    this.cart = new ShoppingCart();
+    // declaring cart property and assigning the instance value of ShoppingCart Class
+    console.log(this.cart); // this.cart => Shop.cart, cart property will have same instance of ShoppingCart
+    const cartEl = this.cart.render();
     console.log(new ProductList()); // ProductList Class or ProductList Object in general
     const productList = new ProductList();
     const productListEl = productList.render();
