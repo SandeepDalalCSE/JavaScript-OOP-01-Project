@@ -35,18 +35,27 @@ console.log(test.title, test.price);
 class ShoppingCart {
   item = [];
 
+  set cartItems(value) {
+    this.item = value; // this will overwrite the existing array with new value.
+    this.totalOutput.innerHTML = `
+    <h2>Total : Rs ${this.totalAmount.toFixed(2)} </h2>
+    `;
+  }
   get totalAmount() {
-    const sum = this.item.reduce((preValue, CurValue)=>{
-      return preValue+CurValue.price;
-    },0);
+    const sum = this.item.reduce((preValue, CurValue) => {
+      return preValue + CurValue.price;
+    }, 0);
     return sum;
   }
 
   addProduct(product) {
-    this.item.push(product); // adding product to item array of shopping cart.
-    this.totalOutput.innerHTML = `
-    <h2>Total : Rs ${this.totalAmount} </h2>
-    `;
+    // this.item.push(product); // adding product to item array of shopping cart.
+    // this.totalOutput.innerHTML = `
+    // <h2>Total : Rs ${this.totalAmount} </h2>
+    // `;
+    const updatedItems = [...this.item]; // copying item array into updatedItems
+    updatedItems.push(product);
+    this.cartItems = updatedItems; // setting the value using setter.
   }
 
   render() {
