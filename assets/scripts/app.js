@@ -35,10 +35,17 @@ console.log(test.title, test.price);
 class ShoppingCart {
   item = [];
 
+  get totalAmount() {
+    const sum = this.item.reduce((preValue, CurValue)=>{
+      return preValue+CurValue.price;
+    },0);
+    return sum;
+  }
+
   addProduct(product) {
     this.item.push(product); // adding product to item array of shopping cart.
     this.totalOutput.innerHTML = `
-    <h2>Total : Rs ${1} </h2>
+    <h2>Total : Rs ${this.totalAmount} </h2>
     `;
   }
 
